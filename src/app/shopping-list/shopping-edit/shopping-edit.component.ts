@@ -28,6 +28,17 @@ export class ShoppingEditComponent implements OnInit {
     const ingAmount = this.amountInputRef.nativeElement.value;
     const newIngredient = new Ingredient(ingName, ingAmount);
     this.slService.addIngredient(newIngredient);
+    this.nameInputRef.nativeElement.value = '';
+    this.amountInputRef.nativeElement.value = '';
+  }
+
+  onClearList(){
+    this.slService.clearList();
   }
 
 }
+
+
+
+
+// this.nameInputRef.nativeElement.value

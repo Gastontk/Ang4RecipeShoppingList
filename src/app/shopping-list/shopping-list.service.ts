@@ -35,6 +35,16 @@ export class ShoppingListService {
   	this.ingredientsChanged.emit(this.ingredients.slice());
 
   }
+
+  clearList(){
+    console.log('Ingredients in cleaList() have gone from', this.ingredients)
+    this.ingredients = [];
+    console.log(' to: ', this.ingredients);
+    this.ingredientsChanged.emit(this.ingredients);
+  }
+
+
+
   // recieveRecipe(recipe: Recipe){
   // 	console.log('Shopping list service recieved recipe', recipe)
   // }
