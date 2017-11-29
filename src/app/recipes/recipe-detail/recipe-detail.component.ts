@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Recipe } from '../recipe.model';
 
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 // import { ShoppingListService } from "../../shopping-list/shopping-list.service";
  
@@ -18,7 +18,7 @@ export class RecipeDetailComponent implements OnInit {
   id: number;
 
   constructor(private recipeService: RecipeService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private router: Router) {
 
  }
 // private slService: ShoppingListService
@@ -34,6 +34,12 @@ export class RecipeDetailComponent implements OnInit {
   	console.log(recipe);
   	// this.slService.recieveRecipe(recipe);
   	this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+  }
+
+  onEditRecipe(){
+    // this.router.navigate(['edit'], {relativeTo: this.route})
+// alternative method Note ../ to move up a level first
+    this.router.navigate(['../', this.id, 'edit'],{relativeTo: this.route});
   }
 
 }
