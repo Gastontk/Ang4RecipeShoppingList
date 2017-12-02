@@ -22,10 +22,10 @@ import { Subscription } from 'rxjs/Subscription'
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   // @ViewChild('nameInput') nameInputRef: ElementRef;
   // @ViewChild('amountInput') amountInputRef: ElementRef;
-  @ViewChild('f') slForm:ngForm
+  @ViewChild('f') slForm:NgForm
 
   subscription: Subscription;
-  editMode: false;
+  editMode = false;
   editedItemIndex: number
   editedItem: Ingredient
 

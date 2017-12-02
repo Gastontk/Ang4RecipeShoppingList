@@ -41,5 +41,10 @@ export class RecipeDetailComponent implements OnInit {
 // alternative method Note ../ to move up a level first
     this.router.navigate(['../', this.id, 'edit'],{relativeTo: this.route});
   }
+  onDeleteRecipe(){
+    console.log('ID to be deleted is:', this.id);
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['/recipes']);
 
+  }
 }

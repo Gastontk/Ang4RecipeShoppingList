@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Recipe } from "./recipe.model"
 import { Ingredient } from "../shared/ingredient.model";
 import { ShoppingListService } from "../shopping-list/shopping-list.service";
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class RecipeService {
+  recipesChanged = new Subject<Recipe[]>();
  	private recipes:Recipe[] = [
 	    new Recipe('Turducken', 'Bring on the meat sweats', 'http://www.seriouseats.com/images/2012/10/20121027-turducken-food-lab-01.jpg', [new Ingredient('Turkey', 1), new Ingredient('Duck', 1), new Ingredient('Chicken', 1) ]),
 	    new Recipe('Dinaguan - Blood Soup', 'Bloody good soup', 'https://www.kawalingpinoy.com/wp-content/uploads/2014/07/dinuguan2a.jpg', [new Ingredient('Pork Blood', 1), new Ingredient('More Pork Blood', 1), new Ingredient('Something Lumpy', 5)])
@@ -12,6 +14,13 @@ export class RecipeService {
 
 
   constructor(private slService:ShoppingListService) { }
+
+  setRecipes(recipes:Recipe[]){
+    this.recipes = recipes;
+    console.log(this.recipes)
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
 
   getRecipes(){
   	return this.recipes.slice();
@@ -23,6 +32,26 @@ export class RecipeService {
   addIngredientsToShoppingList(ingredients: Ingredient[]){
   	console.log('addIngredientToShoppingList in RecipeService', ingredients)
   	this.slService.addIngredients(ingredients);
+  }
+
+
+
+  addRecipe(recipe: Recipe){
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice())
+  }
+
+  updateRecipe(index: number, newRecipe: Recipe){
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  deleteRecipe(index: number){
+      console.log('In service, ready to splice:', index);
+      this.recipes.splice(index, 1);
+      this.recipesChanged.next(this.recipes.slice());
+
+
   }
 
 }
