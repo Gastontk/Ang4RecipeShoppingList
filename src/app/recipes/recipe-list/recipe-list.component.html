@@ -1,16 +1,22 @@
+
+
 <div class="row">
   <div class="col-xs-12">
     <button class="btn btn-success" (click) = 'onNewRecipe()'>New Recipe</button>
   </div>
 </div>
 <hr>
+<label for="">Search By Recipe Name</label>
+<input type="text" [(ngModel)] = 'searchString' >
+<hr>
 <div class="row">
   <div class="col-xs-12">
     <app-recipe-item
-      *ngFor="let recipeEl of recipes; let i= index"
+      *ngFor="let recipeEl of recipes  | alphaSort | nameFilter:searchString:'name' ; let i= index;trackBy:trackByIndex;"
       [recipe]="recipeEl"
       [index] = 'i'
       ></app-recipe-item>
   </div>
 </div>
+<br><br>
 

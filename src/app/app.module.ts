@@ -25,6 +25,8 @@ import { SigninComponent } from './auth/signin/signin.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import {AuthserviceService} from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
+import { AlphaSortPipe } from './alpha-sort.pipe';
+import { NameFilterPipe } from './name-filter.pipe';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { AuthGuard } from './auth/auth.guard';
     RecipeStartComponent,
     RecipeEditComponent,
     SigninComponent,
-    SignupComponent
+    SignupComponent,
+    AlphaSortPipe,
+    NameFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,7 @@ import { AuthGuard } from './auth/auth.guard';
     AppRoutingModule,
     ReactiveFormsModule,
   ],
-  providers: [ShoppingListService, RecipeService, DataStorageService,AuthserviceService, AuthGuard],
+  providers: [ShoppingListService, RecipeService, DataStorageService,AuthserviceService, AuthGuard,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -16,10 +16,12 @@ export class DataStorageService implements OnInit{
 
   ngOnInit(){
    this.tk=  this.authService.getToken()
+   console.log('Token is:', this.tk)
   }
 
 
   storeRecipes(){
+    this.tk=  this.authService.getToken()
   	return this.http.put('https://ng-recipe-book-3fe5f.firebaseio.com/recipes.json?auth=' + this.tk, this.recipeService.getRecipes());
 
   }

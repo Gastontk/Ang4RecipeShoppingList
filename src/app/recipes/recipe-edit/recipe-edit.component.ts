@@ -15,11 +15,13 @@ export class RecipeEditComponent implements OnInit {
 
 
 
+
   constructor(private route: ActivatedRoute, private recipeService: RecipeService, private router: Router) { }
 
   ngOnInit() {
   	this.route.params.subscribe((params:Params)=>{
   		this.id = +params['id'];
+      console.log('translated index is:', this.id)
   		this.editMode = params['id'] != null;
   		console.log('editMode',this.editMode);
       this.initForm();
@@ -34,6 +36,7 @@ export class RecipeEditComponent implements OnInit {
       let recipeName = '';
       let recipeImagePath='';
       let recipeDescription = '';
+      let recipeIndex=null
       let recipeIngredients = new FormArray([]);
        
       if(this.editMode){
@@ -41,6 +44,9 @@ export class RecipeEditComponent implements OnInit {
             recipeName = recipe.name;
             recipeImagePath = recipe.imagePath;
             recipeDescription = recipe.description;
+//added 12-13
+            recipeIndex = recipe.index
+//
             if(recipe['ingredients']){
               for( let ingredient of recipe.ingredients){
                 recipeIngredients.push(
@@ -80,7 +86,7 @@ export class RecipeEditComponent implements OnInit {
   }
 
 
-  ongAddIngredient(){
+  onAddIngredient(){
     (<FormArray>this.recipeForm.get('ingredients')).push( new FormGroup({
         'name': new FormControl(null, Validators.required),
         'amount': new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)]),

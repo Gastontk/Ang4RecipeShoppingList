@@ -7,11 +7,14 @@ export class Recipe {
   public description: string;
   public imagePath: string;
   public ingredients: Ingredient[]
+  public index:number;
 
   constructor(name: string, desc: string, imagePath: string, ingredients:Ingredient[]) {
     this.name = name;
     this.description = desc;
     this.imagePath = imagePath;
     this.ingredients = ingredients;
+
+
   }
 }
