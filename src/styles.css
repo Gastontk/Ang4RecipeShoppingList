@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
   body {
     padding-bottom: 60px;
-	background: url('./app/shared/cooking.jpg') ;
-	/*background-color: black;*/
+	background: url('./app/shared/cooking.jpg')  center no-repeat;
+	/*background-color: #a57c7c;*/
+	    background-size: 2000px 2000px;
+
 
 }

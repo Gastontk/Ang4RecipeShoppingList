@@ -14,7 +14,7 @@
     <app-recipe-item
       *ngFor="let recipeEl of recipes  | alphaSort | nameFilter:searchString:'name' ; let i= index;trackBy:trackByIndex;"
       [recipe]="recipeEl"
-      [index] = 'i'
+      [index] = 'recipeEl.index'
       ></app-recipe-item>
   </div>
 </div>

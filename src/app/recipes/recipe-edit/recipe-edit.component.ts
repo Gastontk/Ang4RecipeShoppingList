@@ -12,6 +12,8 @@ export class RecipeEditComponent implements OnInit {
 	id: number;
 	editMode = false;
   recipeForm: FormGroup
+  recipe:Recipe
+  index:number;
 
 
 
@@ -38,17 +40,17 @@ export class RecipeEditComponent implements OnInit {
       let recipeDescription = '';
       let recipeIndex=null
       let recipeIngredients = new FormArray([]);
-       
+
       if(this.editMode){
-            const recipe=  this.recipeService.getRecipe(this.id)
-            recipeName = recipe.name;
-            recipeImagePath = recipe.imagePath;
-            recipeDescription = recipe.description;
+            this.recipe=  this.recipeService.getRecipe(this.id)
+            recipeName = this.recipe.name;
+            recipeImagePath = this.recipe.imagePath;
+            recipeDescription = this.recipe.description;
 //added 12-13
-            recipeIndex = recipe.index
+            this.index = this.recipe.index
 //
-            if(recipe['ingredients']){
-              for( let ingredient of recipe.ingredients){
+            if(this.recipe['ingredients']){
+              for( let ingredient of this.recipe.ingredients){
                 recipeIngredients.push(
                   new FormGroup({
                     "name": new FormControl(ingredient.name, Validators.required),
@@ -75,7 +77,7 @@ export class RecipeEditComponent implements OnInit {
     //   this.recipeForm.value['ingredients'],)
     console.log(this.recipeForm);
     if(this.editMode){
-       this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+       this.recipeService.updateRecipe(this.recipe.index, this.recipeForm.value);
     }else{
       this.recipeService.addRecipe(this.recipeForm.value);
     }
